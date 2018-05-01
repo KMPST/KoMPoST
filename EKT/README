@@ -1,0 +1,15 @@
+Folders KoMPoST/EKT/ENERGYRESPONSE/ and KoMPoST/EKT/MOMENTUMRESPONSE 
+contain momentum response functions to initial energy and momentum perturbations
+ for kinetic evolution with lambda=10 for time (in lattice units) from tau0=1 to tau=2-100, which are read in by 
+KoMPoST/src/ENERGYRESPONSE/MomentumSpaceKineticTheory.inc
+KoMPoST/src/MOMENTUMRESPONSE/MomentumSpaceKineticTheory.inc
+
+The first line of each file, e.g. EnergyGreensFunctionT1-10.txt, contains fit coefficients 
+of large k tail to the corresponding free streaming response functions. 
+See Appendix C of the companion paper and the code.
+
+The columns of ENERGYRESPONSE files
+# 1:k*(tau-tau_0) 2:G_s^s 3:G_s^v 4:G_s^{td} 5:G_s^{tk}
+
+The columns of MOMENTUMRESPONSE files
+# 1:k*(tau-tau_0) 2:G_v^s 3:G_s^d 4:G_v^k 5:G_v^{td} 6:G_v^{tm} 7:G_v^{tk}

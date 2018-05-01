@@ -1,0 +1,3 @@
+Step 1: Copy input file "setup_ipglasma.ini" in the base directory
+Step 2: Compile the code with the makefile. It will create the executable "KoMPoST.exe"
+Step 3: Run "./KoMPoST.exe setup_ipglasma.ini". The results will be located according to "OutputFileTag", as specified in the input file

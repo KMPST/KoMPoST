@@ -1,0 +1,5 @@
+Step 1: Use Python script 'trento_kompost_interface.py' to understand how to interface Trento and KoMPoST
+Step 2: Modify 'trento_kompost_interface.py' if necessary, and run it with 'python3 trento_kompost_interface.py'
+Step 3 : Copy the resulting KoMPoST input file (default name "setup_trento.ini") in the base directory
+Step 4: Compile the code with the makefile. It will create the executable "KoMPoST.exe"
+Step 5: Run "./KoMPoST.exe setup_trento.ini". The results will be located according to "OutputFileTag", as specified in the input file
