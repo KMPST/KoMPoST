@@ -152,13 +152,15 @@ void EnergyMomentumTensorMapLoad(EnergyMomentumTensorMap *TIn, std::string fname
             InputValues >> T0X; InputValues >> T0Y; InputValues >> T0Z;
             InputValues >> TXY; InputValues >> TYZ; InputValues >> TZX;
             
-            // SAVE ENERGY-MOMENTUM TENSOR //
+            // SAVE ENERGY-MOMENTUM TENSOR TO MEMORY //
             const double small_num=1000*GSL_DBL_MIN;
-            if (T00 < small_num and printfirst) {
-            std::cerr << "Warning: encountared small energy density T^{\\tau\\tau}<" << small_num << " at (ix,iy)=" << xS << "," << yS << ")!! Using T^{\\mu\\nu}=diag(" << 10*small_num << "," << 5*small_num << "," << 5*small_num << ",0) instead.\n"; 
+            if (T00 < small_num) {
+		    if (printfirst) {
+			    std::cerr << "Warning: encountered small energy density T^{\\tau\\tau}<" << small_num << " at (ix,iy)=" << xS << "," << yS << ")!! Using T^{\\mu\\nu}=diag(" << 10*small_num << "," << 5*small_num << "," << 5*small_num << ",0) instead.\n"; 
+			    std::cerr << "Further warnings of small T^{\\tau\\tau} will be suppressed." << std::endl;
+			    printfirst=false;
+		    }
                     TIn->Set(xS,yS,10*small_num,5*small_num,5*small_num,0,0,0,0,0,0,0);
-            std::cerr << "Further warnings of small T^{\\tau\\tau} will be supressed." << std::endl;
-                    printfirst=false;
             }
             else {
                     TIn->Set(xS,yS,ScaleFactor*T00,ScaleFactor*TXX,ScaleFactor*TYY,ScaleFactor*TZZ,ScaleFactor*T0X,ScaleFactor*T0Y,ScaleFactor*T0Z,ScaleFactor*TXY,ScaleFactor*TYZ,ScaleFactor*TZX);
