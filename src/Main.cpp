@@ -46,10 +46,10 @@ int main(int argc, char **argv) {
   std::string default_InputFile="examples/ipglasma/EnergyMomentumTensorT0.2005fmID1483491970.txt_sigma02_big_smeared_coarse";
   std::string default_OutputFileTag="EnergyMomentumTensorT1.2005fmID1483491970" ;
 
-  double tIn = reader.GetReal("KoMPoST_IO","tIn",default_tIn) ;
-  double tOut = reader.GetReal("KoMPoST_IO","tOut",default_tOut);
-  std::string InputFile = reader.GetString("KoMPoST_IO", "InputFile", default_InputFile) ;
-  std::string OutputFileTag =reader.GetString("KoMPoST_IO", "OutputFileTag", default_OutputFileTag) ;
+  double tIn = reader.GetReal("KoMPoSTInputs","tIn",default_tIn) ;
+  double tOut = reader.GetReal("KoMPoSTInputs","tOut",default_tOut);
+  std::string InputFile = reader.GetString("KoMPoSTInputs", "InputFile", default_InputFile) ;
+  std::string OutputFileTag =reader.GetString("KoMPoSTInputs", "OutputFileTag", default_OutputFileTag) ;
 
   //  Get grid parameters from input file
   EventInput::Setup(reader);
