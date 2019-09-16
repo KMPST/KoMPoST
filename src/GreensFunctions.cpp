@@ -59,7 +59,8 @@ if((xValue)<(xMinValue) || (xValue)>(xMaxValue) || (yValue)<(yMinValue) || (yVal
         else{return 0.0;} \
     }\
     else if((yValue)>(yMaxValue)){\
-	return gsl_spline2d_eval(Interpolator,xValue,yMaxValue,xAccelerator,yAccelerator); \
+        if((xValue)<(xMinValue)){return gsl_spline2d_eval(Interpolator,xMinValue,yMaxValue,xAccelerator,yAccelerator);} \
+	else{return gsl_spline2d_eval(Interpolator,xValue,yMaxValue,xAccelerator,yAccelerator);} \
     } \
     else{\
 	std::cerr << "#WARNING " << xValue << " " << xMinValue  << " " << xMaxValue << " " << yValue << " " << yMinValue  << " " << yMaxValue  << std::endl; \
