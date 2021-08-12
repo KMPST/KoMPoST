@@ -136,6 +136,8 @@ void EnergyMomentumTensorMapLoad(EnergyMomentumTensorMap *TIn, std::string fname
     int InputCount=0;
     bool printfirst=true; 
     // GET DATA LINE BY LINE //
+    // Get header first
+    getline(InStream,InputLine);
     while(InStream.good()){
         
         // READ LINE //
