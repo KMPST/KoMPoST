@@ -37,7 +37,7 @@ void Setup(INIReader &reader) {
   ySTART = reader.GetInteger("EventInput", "ySTART", ySTART);
   yEND = reader.GetInteger("EventInput", "yEND", yEND);
 
-  std::cerr << "** EventInput ** Initialized a grid layout:\n" 
+  std::cerr << "** EventInput ** Initialized a grid layout:\n"
             << "  afm    = " << afm << "\n"
             << "  Ns     = " << Ns << "\n"
             << "  xSTART = " << xSTART << "\n"
@@ -48,6 +48,8 @@ void Setup(INIReader &reader) {
 }
 
 namespace KoMPoSTParameters {
+
+std::string KineticTheory("EKT");
 
 double EtaOverS = 2. / (4 * M_PI);
 double EtaOverSTemperatureScale = 0.1; // GeV cuttoff temperature scale
@@ -61,6 +63,8 @@ int ENERGY_PERTURBATIONS = 1;
 int MOMENTUM_PERTURBATIONS = 1;
 
 void Setup(INIReader &reader) {
+
+  KineticTheory = reader.GetString("KoMPoSTParameters","KineticTheory",KineticTheory);
 
   // Determines the scaling variable
   EtaOverS = reader.GetReal("KoMPoSTParameters", "EtaOverS", EtaOverS);
@@ -81,7 +85,8 @@ void Setup(INIReader &reader) {
   MOMENTUM_PERTURBATIONS = reader.GetInteger(
       "KoMPoSTParameters", "MOMENTUM_PERTURBATIONS", MOMENTUM_PERTURBATIONS);
 
-  std::cerr << "** EventInput ** Initialized KoMPoST parameters:\n" 
+  std::cerr << "** EventInput ** Initialized KoMPoST parameters:\n"
+            << "  KineticTheory            = " << KineticTheory << "\n"
             << "  EtaOverS                 = " << EtaOverS << "\n"
             << "  EtaOverSTemperatureScale = " << EtaOverSTemperatureScale << "\n"
             << "  Regulator                = " << Regulator << "\n"
