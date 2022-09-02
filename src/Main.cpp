@@ -40,6 +40,13 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
+  std::string KineticTheoryCheck=reader.GetString("KoMPoSTParameters","KineticTheory","EKT");
+  if (!(KineticTheoryCheck=="EKT"||KineticTheoryCheck=="RTA")){
+    std::cerr << "Error: parameter KineticTheory must be either EKT or RTA in " << argv[1] << std::endl;
+    std::cerr << "if unspecified, default value is EKT" << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
   //  Get KoMPoST input/output parameters from input file
   double default_tIn = 0.2005;
   double default_tOut = 1.2005;
@@ -66,7 +73,7 @@ int main(int argc, char **argv) {
 
   // ALLOCATE INITIAL ENERGY-MOMENTUM TENSOR //
   EnergyMomentumTensorMap *Tmunu_In = new EnergyMomentumTensorMap(tIn);
-  
+
   // LOAD INITIAL ENERGY MOMENTUM TENSOR //
   EnergyMomentumTensorMapLoad(Tmunu_In, InputFile);
 
