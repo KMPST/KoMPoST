@@ -14,6 +14,7 @@
 #include<sstream>
 #include<omp.h>
 
+#include "EventInput.h"
 
 // GSL INTEGRATION //
 #include <gsl/gsl_integration.h>

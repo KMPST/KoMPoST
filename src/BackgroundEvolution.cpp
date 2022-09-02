@@ -11,6 +11,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include "EventInput.h"
 #include "BackgroundEvolution.h"
 #include "ScalingVariable.h"
 
