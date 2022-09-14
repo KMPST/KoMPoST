@@ -58,12 +58,15 @@ int main(int argc, char **argv) {
   std::string InputFile = reader.GetString("KoMPoSTInputs", "InputFile", default_InputFile) ;
   std::string OutputFileTag =reader.GetString("KoMPoSTInputs", "OutputFileTag", default_OutputFileTag) ;
 
+  double default_SigmaScale=0.1;
+  double SigmaScale=reader.GetReal("KoMPoSTParameters","SigmaScale",default_SigmaScale);
+
   //  Get grid parameters from input file
   EventInput::Setup(reader);
   //  Get KoMPoST parameters from input file
   // Smearing width of response functions
   // Hard-coded
-  KoMPoSTParameters::Sigma=0.1/(tOut-tIn);
+  KoMPoSTParameters::Sigma=SigmaScale/(tOut-tIn);
   KoMPoSTParameters::Setup(reader);
 
   // SETUP OpenMP
