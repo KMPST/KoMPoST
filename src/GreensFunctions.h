@@ -150,7 +150,7 @@ public:
   }
 
   double Entropy(double e) const {
-    double T = pow(30. / (M_PI * M_PI * NuG) * e, 0.25);
+    double T = pow(30. / (M_PI * M_PI * KoMPoSTParameters::NuG) * e, 0.25);
     return 4. / 3. * e / T;
   }
 };

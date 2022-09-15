@@ -51,6 +51,9 @@ namespace KoMPoSTParameters {
 
 std::string KineticTheory("EKT");
 
+//Number of DOF
+double NuG=16.0;
+
 double EtaOverS = 2. / (4 * M_PI);
 double EtaOverSTemperatureScale = 0.1; // GeV cuttoff temperature scale
 
@@ -67,6 +70,8 @@ void Setup(INIReader &reader) {
   KineticTheory = reader.GetString("KoMPoSTParameters","KineticTheory",KineticTheory);
 
   // Determines the scaling variable
+  NuG = reader.GetReal("KoMPoSTParameters","NuG",NuG);
+
   EtaOverS = reader.GetReal("KoMPoSTParameters", "EtaOverS", EtaOverS);
 
   EtaOverSTemperatureScale = reader.GetReal(

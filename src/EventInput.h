@@ -34,6 +34,7 @@ void Setup(INIReader &reader);
 namespace KoMPoSTParameters {
 extern std::string KineticTheory;
 
+extern double NuG;
 extern double EtaOverS;
 extern double EtaOverSTemperatureScale;
 extern double Sigma;
