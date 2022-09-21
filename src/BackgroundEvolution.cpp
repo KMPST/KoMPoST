@@ -41,14 +41,14 @@ namespace BackgroundEvolution {
             // DEFINE YANG-MILLS CONSTANTS //
             if(KoMPoSTParameters::KineticTheory=="EKT"){
 
-                C2=1.02;
+                C2=1.05;
 
-                F0 =0.3037314623;
-                b = -0.02260000191;
-                c = 0.00084856491;
+                F0 = 1.0767/sqrt(4*M_PI);
+                b = -0.284/(4*M_PI);
+                c = 0.134/pow(4*M_PI,2);
 
-                xSwitch=8.16814089933;
-                xRange=3.14159265359;
+                xSwitch=0.65*4*M_PI;
+                xRange=0.25*4*M_PI;
 
             }
 
