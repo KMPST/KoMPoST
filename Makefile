@@ -1,15 +1,15 @@
 # C++ compiler
-CXX=g++
+CXX=clang++
 # GSL >=2.0 required
 GSLCFLAGS=`gsl-config --cflags`
 GSLLIBS=`gsl-config --libs`
-# C++ compiler flags
-CXXFLAGS =-Wall -std=c++11 -O3 -lstdc++ -fopenmp
+# C++ compiler flags -I/usr/local/opt/llvm/include -fopenmp
+CXXFLAGS =-Xpreprocessor -fopenmp -Wall -std=c++11 -O3 -lstdc++ -I/usr/local/opt/llvm/include -lomp
 # ini file parser files
 INISRC =\
 		 inih/ini.c \
 		 inih/INIReader.cpp
-INIINC=-I./inih	
+INIINC=-I./inih
 # source files of KoMPoST
 KOMPOSTSRC =\
 		 src/Main.cpp \

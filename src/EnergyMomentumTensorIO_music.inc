@@ -178,7 +178,7 @@ void EnergyMomentumTensorMapLoad(EnergyMomentumTensorMap *TIn, std::string fname
     
     // CHECK //
     if(InputCount!=Ns*Ns){
-        std::cerr << "#ERROR -- COULD NOT LOAD INPUT FILE CORRECTLY" << std::endl;
+        std::cerr << "#ERROR -- COULD NOT LOAD INPUT FILE CORRECTLY" << InputCount << " " << Ns*Ns << std::endl;
         exit(EXIT_FAILURE);
     }
     

@@ -25,6 +25,9 @@
 // ENERGY-MOMENTUM TENSOR IO //
 #include "EnergyMomentumTensorIO_music.inc"
 
+// PHOTON YIELD //
+#include "PHOTONS/Photons.cpp"
+
 int main(int argc, char **argv) {
   // Try to open input file
   if (argc < 2) {
@@ -40,6 +43,7 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
+  
   //  Get KoMPoST input/output parameters from input file
   double default_tIn = 0.2005;
   double default_tOut = 1.2005;
@@ -58,6 +62,8 @@ int main(int argc, char **argv) {
   // Hard-coded
   KoMPoSTParameters::Sigma=0.1/(tOut-tIn);
   KoMPoSTParameters::Setup(reader);
+  // Get photon parameters from input file
+  if(KoMPoSTParameters::PHOTON_YIELD==1){PhotonParameters::Setup(reader);}
 
   // SETUP OpenMP
   int NumberOfOpenMPThreads = omp_get_max_threads();
@@ -80,6 +86,9 @@ int main(int argc, char **argv) {
   KoMPoST::Run(Tmunu_In, Tmunu_OutBG, Tmunu_OutFull) ;
   // END OF KOMPOST EVOLUTION //
 
+  // COMPUTE PHOTONS FROM THE PRE-EQUILIBRIUM PHASE // 
+  if(KoMPoSTParameters::PHOTON_YIELD==1){Photons::GetPhoton(Tmunu_OutFull);}
+  
   // WRITE OUT EVOLVED ENERGY-MOMENTUM TENSOR //
   void write_initial_conditions_MUSIC(std::string outfile_name, bool use_sigmamunu_NavierStokes, double dx, double dy, int Nx, int Ny, EnergyMomentumTensorMap *Tmunu_Out_Full, EnergyMomentumTensorMap *Tmunu_Out_BG);
   std::string tmp = std::string(OutputFileTag) + ".music_init_flowNonLinear_pimunuTransverse.txt";

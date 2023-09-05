@@ -52,6 +52,8 @@ namespace KoMPoSTParameters {
 double EtaOverS = 2. / (4 * M_PI);
 double EtaOverSTemperatureScale = 0.1; // GeV cuttoff temperature scale
 
+const int NuG=16;
+
 std::string Regulator("TwoPass");
 
 double Sigma;
@@ -59,6 +61,7 @@ double Sigma;
 int EVOLUTION_MODE = 1;
 int ENERGY_PERTURBATIONS = 1;
 int MOMENTUM_PERTURBATIONS = 1;
+int PHOTON_YIELD = 1;
 
 void Setup(INIReader &reader) {
 
@@ -81,6 +84,9 @@ void Setup(INIReader &reader) {
   MOMENTUM_PERTURBATIONS = reader.GetInteger(
       "KoMPoSTParameters", "MOMENTUM_PERTURBATIONS", MOMENTUM_PERTURBATIONS);
 
+  PHOTON_YIELD = reader.GetInteger(
+      "KoMPoSTParameters", "PHOTON_YIELD", PHOTON_YIELD);
+
   std::cerr << "** EventInput ** Initialized KoMPoST parameters:\n" 
             << "  EtaOverS                 = " << EtaOverS << "\n"
             << "  EtaOverSTemperatureScale = " << EtaOverSTemperatureScale << "\n"
@@ -88,7 +94,33 @@ void Setup(INIReader &reader) {
             << "  EVOLUTION_MODE           = " << EVOLUTION_MODE << " ; 0 -- free streaming, 1 -- EKT\n"
             << "  ENERGY_PERTURBATIONS     = " << ENERGY_PERTURBATIONS << "\n"
             << "  MOMENTUM_PERTURBATIONS   = " << MOMENTUM_PERTURBATIONS << "\n"
+            << "  PHOTON_YIELD             = " << PHOTON_YIELD << "\n"
             << "  Sigma                    = " << Sigma <<  std::endl;
 }
+}
+
+namespace PhotonParameters {
+
+// Set default parameter values for photon production
+
+// Default CIdeal is computed from AMY [arXiv:hep-ph/0111107] for \alpha_S=0.26 including charges for Nf=3
+double CIdeal=0.572812;
+
+// Default minimal temperature that must be exceeded to allow pre-equilibrium photon production in GeV
+double TConf=0.160;
+
+void Setup(INIReader &reader){
+    
+    // Determines scaling variable CIdeal for photon production
+    CIdeal = reader.GetReal("PhotonParameters", "CIdeal", CIdeal);
+
+    // Determines the minimal temperature necessary for photon production in units of GeV
+    TConf = reader.GetReal("PhotonParameters", "TConf", TConf);
+
+    std::cerr << "** EventInput ** Initialized photon parameters:\n" 
+            << "  CIdeal    = " << CIdeal << "\n"
+            << "  TMin      = " << TConf <<  std::endl;
+}
+
 }
 #endif

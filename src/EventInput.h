@@ -28,6 +28,7 @@ extern int xEND;
 extern int ySTART;
 extern int yEND;
 
+
 void Setup(INIReader &reader);
 }
 
@@ -36,13 +37,25 @@ extern double EtaOverS;
 extern double EtaOverSTemperatureScale;
 extern double Sigma;
 
+extern const int NuG;
+
 extern std::string Regulator;
 
 extern int EVOLUTION_MODE;
 extern int ENERGY_PERTURBATIONS;
 extern int MOMENTUM_PERTURBATIONS;
+extern int PHOTON_YIELD;
 extern int DECOMPOSITION_METHOD;
 
 void Setup(INIReader &reader);
 }
+
+namespace PhotonParameters {
+
+extern double CIdeal;
+extern double TConf;
+
+void Setup(INIReader &reader);
+}
+
 #endif

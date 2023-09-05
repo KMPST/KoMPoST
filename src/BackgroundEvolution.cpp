@@ -13,6 +13,7 @@
 #include <cmath>
 #include "BackgroundEvolution.h"
 #include "ScalingVariable.h"
+#include "EventInput.h"
 
 #ifndef M_HBARC
 #define M_HBARC  0.197326979
@@ -28,7 +29,7 @@ namespace BackgroundEvolution {
     
     namespace KineticTheory{
         //Number of DOF
-        const int NuG=16;
+        //const int NuG=16;
         
         // MAXIMUM AND MINIMUM SCALING VARIABLES //
         double sMin=0.0; double sMax=512.0;
@@ -76,7 +77,7 @@ namespace BackgroundEvolution {
                 double sValue=sv.ScalingVar(tIn, KValue) ;
                 
                 // COMPUTE EKT ENERGY //
-                double ERec=NuG*(M_PI*M_PI)/30.0*(KValue*KValue*KValue*KValue)/(KValue*tInGeV*sqrt(EtaOverS))*EnergyScalingCurveValue(sValue)/sqrt(sValue);
+                double ERec=KoMPoSTParameters::NuG*(M_PI*M_PI)/30.0*(KValue*KValue*KValue*KValue)/(KValue*tInGeV*sqrt(EtaOverS))*EnergyScalingCurveValue(sValue)/sqrt(sValue);
                 
                 // CHOOSE NEW INTERVAL //
                 if(ERec>EIn){
@@ -90,10 +91,10 @@ namespace BackgroundEvolution {
             
             // PERFORM LINEAR INTPEROLATION //
             double sLow=sv.ScalingVar(tIn,KLow);
-            double ELow=NuG*(M_PI*M_PI)/30.0*(KLow*KLow*KLow*KLow)/(KLow*tInGeV*sqrt(EtaOverS))*EnergyScalingCurveValue(sLow)/sqrt(sLow);
+            double ELow=KoMPoSTParameters::NuG*(M_PI*M_PI)/30.0*(KLow*KLow*KLow*KLow)/(KLow*tInGeV*sqrt(EtaOverS))*EnergyScalingCurveValue(sLow)/sqrt(sLow);
             
             double sHigh=sv.ScalingVar(tIn,KHigh);
-            double EHigh=NuG*(M_PI*M_PI)/30.0*(KHigh*KHigh*KHigh*KHigh)/(KHigh*tInGeV*sqrt(EtaOverS))*EnergyScalingCurveValue(sHigh)/sqrt(sHigh);
+            double EHigh=KoMPoSTParameters::NuG*(M_PI*M_PI)/30.0*(KHigh*KHigh*KHigh*KHigh)/(KHigh*tInGeV*sqrt(EtaOverS))*EnergyScalingCurveValue(sHigh)/sqrt(sHigh);
             
             double KValue = KLow + (EIn-ELow)/(EHigh-ELow)*(KHigh-KLow);
             ScalingVarIn = sv.ScalingVar(tIn,KValue);
@@ -109,8 +110,8 @@ namespace BackgroundEvolution {
             double tOutGeV=tOut/M_HBARC;
             
             // SET ENERGY-MOMENTUM TENSOR VALUES //
-            T00=NuG*(M_PI*M_PI)/30.0*(KValue*KValue*KValue*KValue)/(KValue*tOutGeV*sqrt(EtaOverS))*EnergyScalingCurveValue(ScalingVarOut)/sqrt(ScalingVarOut);
-            TZZ=NuG*(M_PI*M_PI)/90.0*(KValue*KValue*KValue*KValue)/(KValue*tOutGeV*sqrt(EtaOverS))*PressureScalingCurveValue(ScalingVarOut)/sqrt(ScalingVarOut);
+            T00=KoMPoSTParameters::NuG*(M_PI*M_PI)/30.0*(KValue*KValue*KValue*KValue)/(KValue*tOutGeV*sqrt(EtaOverS))*EnergyScalingCurveValue(ScalingVarOut)/sqrt(ScalingVarOut);
+            TZZ=KoMPoSTParameters::NuG*(M_PI*M_PI)/90.0*(KValue*KValue*KValue*KValue)/(KValue*tOutGeV*sqrt(EtaOverS))*PressureScalingCurveValue(ScalingVarOut)/sqrt(ScalingVarOut);
             TXX=0.5*(T00-TZZ);
             TYY=0.5*(T00-TZZ);
 
@@ -128,8 +129,8 @@ namespace BackgroundEvolution {
             double KValue=BackgroundEvolution::KineticTheory::DetermineScalingFactor(T00In,tIn,sv,sInValue);
             
             // GET RECONSTRUCTED ENERGY-MOMENTUM TENSOR VALUES //
-            double T00Rec=NuG*(M_PI*M_PI)/30.0*(KValue*KValue*KValue*KValue)/(KValue*tInGeV*sqrt(EtaOverS))*EnergyScalingCurveValue(sInValue)/sqrt(sInValue);
-            double TZZRec=NuG*(M_PI*M_PI)/90.0*(KValue*KValue*KValue*KValue)/(KValue*tInGeV*sqrt(EtaOverS))*PressureScalingCurveValue(sInValue)/sqrt(sInValue);
+            double T00Rec=KoMPoSTParameters::NuG*(M_PI*M_PI)/30.0*(KValue*KValue*KValue*KValue)/(KValue*tInGeV*sqrt(EtaOverS))*EnergyScalingCurveValue(sInValue)/sqrt(sInValue);
+            double TZZRec=KoMPoSTParameters::NuG*(M_PI*M_PI)/90.0*(KValue*KValue*KValue*KValue)/(KValue*tInGeV*sqrt(EtaOverS))*PressureScalingCurveValue(sInValue)/sqrt(sInValue);
             double TXXRec=0.5*(T00Rec-TZZRec);
             double TYYRec=0.5*(T00Rec-TZZRec);
             
