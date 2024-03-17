@@ -26,7 +26,8 @@
 #include "EnergyMomentumTensorIO_music.inc"
 
 // PHOTON YIELD //
-#include "PHOTONS/Photons.cpp"
+#include "EM_RATES/PHOTONS/photons.cpp"
+#include "EM_RATES/DILEPTONS/dileptons.cpp"
 
 int main(int argc, char **argv) {
   // Try to open input file
@@ -63,7 +64,9 @@ int main(int argc, char **argv) {
   KoMPoSTParameters::Sigma=0.1/(tOut-tIn);
   KoMPoSTParameters::Setup(reader);
   // Get photon parameters from input file
-  if(KoMPoSTParameters::PHOTON_YIELD==1){PhotonParameters::Setup(reader);}
+  if(KoMPoSTParameters::PHOTON_YIELD==1 || KoMPoSTParameters::DILEPTON_YIELD==1){EMParameters::Setup(reader);}
+  // Get dilepton parameters from input file
+  //if(KoMPoSTParameters::DILEPTON_YIELD==1){EMParameters::Setup(reader);}
 
   // SETUP OpenMP
   int NumberOfOpenMPThreads = omp_get_max_threads();
@@ -88,6 +91,9 @@ int main(int argc, char **argv) {
 
   // COMPUTE PHOTONS FROM THE PRE-EQUILIBRIUM PHASE // 
   if(KoMPoSTParameters::PHOTON_YIELD==1){Photons::GetPhoton(Tmunu_OutFull);}
+
+  // COMPUTE DILEPTONS FROM THE PRE-EQUILIBRIUM PHASE // 
+  if(KoMPoSTParameters::DILEPTON_YIELD==1){Dileptons::GetDilepton(Tmunu_OutFull);}
   
   // WRITE OUT EVOLVED ENERGY-MOMENTUM TENSOR //
   void write_initial_conditions_MUSIC(std::string outfile_name, bool use_sigmamunu_NavierStokes, double dx, double dy, int Nx, int Ny, EnergyMomentumTensorMap *Tmunu_Out_Full, EnergyMomentumTensorMap *Tmunu_Out_BG);

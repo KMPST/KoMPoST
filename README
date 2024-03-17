@@ -82,8 +82,9 @@ MUSIC input file
 //\pi^{\mu\nu} is in units of fermi.
 // Note that the loop order is different than in the input file
 
+6) After the default KoMPoST evolution, the energy density at tau_hydro is used to compute the dilepton and photon spectrum based on the EKT scaling functions found in https://arxiv.org/abs/2403.04846 (dileptons) and https://arxiv.org/abs/2308.09747 (photons)
 
-6) The generated data files can be then passed on to hydrodynamic evolution.
+7) The generated data files can be then passed on to hydrodynamic evolution.
 
 
 
@@ -117,6 +118,15 @@ MUSIC input file
        src/MOMENTUMRESPONSE/MomentumSpaceFreeStreaming.inc
        src/MOMENTUMRESPONSE/BesselTransform.inc
 
+#  ShinyKOMPOST EXTENSION:
+       src/EM_RATES/em_rates_parameters.h
+       src/EM_RATES/DILEPTONS/dileptons.cpp
+       src/EM_RATES/DILEPTONS/ekt_dilepton.h
+       src/EM_RATES/DILEPTONS/ekt_yields_dilepton.h
+       src/EM_RATES/PHOTONS/photons.cpp
+       src/EM_RATES/PHOTONS/ekt_photon.h
+       src/EM_RATES/PHOTONS/ekt_yields_photon.h
+
 # INPUT/OUTPUT ROUTINES:
        src/EnergyMomentumTensorIO_music.inc
        src/ComputeSigma.inc
@@ -128,9 +138,14 @@ MUSIC input file
 # DATA FILES:
        EKT/ENERGYRESPONSE/EnergyGreensFunctionT1-XX.txt
        EKT/MOMENTUMRESPONSE/MomentumGreensFunctionT1-XX.txt
+       EKT_DILEPTON/README.md
+       EKT_DILEPTON/ConstantsLambda10.txt
+       EKT_DILEPTON/EvolutionParametersLambda10.txt
+       EKT_DILEPTON/LAMBDA_10/YIELD_DILEPTONS/Yield_dNMdM_LO_XX.txt
+       EKT_PHOTON/README.md
+       EKT_PHOTON/ConstantsLambda10.txt
+       EKT_PHOTON/EvolutionParametersLambda10.txt
+       EKT_PHOTON/LAMBDA_10/pT_SPECTRUM_LEADING_ORDER_RATES/pTSpectrum_LeadingOrderRatePhotonsXX.txt
 
 # OUTPUT FILES:
-      see Main.cpp and EnergyMomentumTensorIO_music.inc
-
-
-
+      see Main.cpp, EnergyMomentumTensorIO_music.inc, dileptons.cpp and photons.cpp

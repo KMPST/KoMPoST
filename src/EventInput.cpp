@@ -62,6 +62,7 @@ int EVOLUTION_MODE = 1;
 int ENERGY_PERTURBATIONS = 1;
 int MOMENTUM_PERTURBATIONS = 1;
 int PHOTON_YIELD = 1;
+int DILEPTON_YIELD = 1;
 
 void Setup(INIReader &reader) {
 
@@ -87,6 +88,9 @@ void Setup(INIReader &reader) {
   PHOTON_YIELD = reader.GetInteger(
       "KoMPoSTParameters", "PHOTON_YIELD", PHOTON_YIELD);
 
+  DILEPTON_YIELD = reader.GetInteger(
+      "KoMPoSTParameters", "DILEPTON_YIELD", DILEPTON_YIELD);
+
   std::cerr << "** EventInput ** Initialized KoMPoST parameters:\n" 
             << "  EtaOverS                 = " << EtaOverS << "\n"
             << "  EtaOverSTemperatureScale = " << EtaOverSTemperatureScale << "\n"
@@ -95,27 +99,28 @@ void Setup(INIReader &reader) {
             << "  ENERGY_PERTURBATIONS     = " << ENERGY_PERTURBATIONS << "\n"
             << "  MOMENTUM_PERTURBATIONS   = " << MOMENTUM_PERTURBATIONS << "\n"
             << "  PHOTON_YIELD             = " << PHOTON_YIELD << "\n"
+            << "  DILEPTON_YIELD           = " << DILEPTON_YIELD << "\n"
             << "  Sigma                    = " << Sigma <<  std::endl;
 }
 }
 
-namespace PhotonParameters {
+namespace EMParameters {
 
-// Set default parameter values for photon production
+// Set default parameter values for photon and dilepton production
 
 // Default CIdeal is computed from AMY [arXiv:hep-ph/0111107] for \alpha_S=0.26 including charges for Nf=3
 double CIdeal=0.572812;
 
-// Default minimal temperature that must be exceeded to allow pre-equilibrium photon production in GeV
+// Default minimal temperature in GeV that must be exceeded to allow pre-equilibrium photon and dilepton production
 double TConf=0.160;
 
 void Setup(INIReader &reader){
     
     // Determines scaling variable CIdeal for photon production
-    CIdeal = reader.GetReal("PhotonParameters", "CIdeal", CIdeal);
+    CIdeal = reader.GetReal("EMParameters", "CIdeal", CIdeal);
 
-    // Determines the minimal temperature necessary for photon production in units of GeV
-    TConf = reader.GetReal("PhotonParameters", "TConf", TConf);
+    // Determines the minimal temperature in units of GeV necessary for photon and dilepton production
+    TConf = reader.GetReal("EMParameters", "TConf", TConf);
 
     std::cerr << "** EventInput ** Initialized photon parameters:\n" 
             << "  CIdeal    = " << CIdeal << "\n"

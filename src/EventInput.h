@@ -45,14 +45,16 @@ extern int EVOLUTION_MODE;
 extern int ENERGY_PERTURBATIONS;
 extern int MOMENTUM_PERTURBATIONS;
 extern int PHOTON_YIELD;
+extern int DILEPTON_YIELD;
 extern int DECOMPOSITION_METHOD;
 
 void Setup(INIReader &reader);
 }
 
-namespace PhotonParameters {
+namespace EMParameters {
 
 extern double CIdeal;
+
 extern double TConf;
 
 void Setup(INIReader &reader);

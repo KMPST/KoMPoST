@@ -1,4 +1,4 @@
-1:StepCounter[lambda=10] 2:tau[lambda=10] 3:T(\tau)[lambda=10] 4:wTilde[lambda=10]
+#1:StepCounter[lambda=10] 2:tau[lambda=10] 3:T(\tau)[lambda=10] 4:wTilde[lambda=10]
 8550 2.93662 0.333477 0.078429
 8650 2.98544 0.332052 0.0793922
 8750 3.03538 0.330624 0.0803731
